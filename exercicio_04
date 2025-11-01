@@ -1,0 +1,53 @@
+// Arquivo: Exercicio4_Comissoes.cs
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        const double SALARIO_BASE = 200.0;
+        const double COMISSAO = 0.09;
+
+        // Vetor com 9 posições para contar cada faixa
+        int[] faixas = new int[9];
+
+        Console.WriteLine("=== Cálculo de Comissão dos Vendedores ===");
+        Console.WriteLine("Digite o valor total de vendas de cada vendedor.");
+        Console.WriteLine("Digite -1 para encerrar.\n");
+
+        while (true)
+        {
+            Console.Write("Valor de vendas: R$ ");
+            double vendas = double.Parse(Console.ReadLine());
+
+            if (vendas == -1)
+                break; // encerra a entrada
+
+            // Calcula o salário total
+            double salario = SALARIO_BASE + (COMISSAO * vendas);
+
+            // Determina a faixa de salário
+            int indiceFaixa;
+
+            if (salario >= 1000)
+                indiceFaixa = 8; // última faixa
+            else
+                indiceFaixa = (int)((salario - 200) / 100); // Exemplo: 299 → faixa 0, 350 → faixa 1
+
+            faixas[indiceFaixa]++;
+
+            Console.WriteLine($"Salário total do vendedor: R$ {salario:F2}\n");
+        }
+
+        Console.WriteLine("\n=== Quantidade de vendedores por faixa ===");
+        for (int i = 0; i < 8; i++)
+        {
+            double inicio = 200 + (i * 100);
+            double fim = inicio + 99;
+            Console.WriteLine($"R$ {inicio:F0} – R$ {fim:F0}: {faixas[i]} vendedor(es)");
+        }
+
+        Console.WriteLine($"R$ 1000 ou mais: {faixas[8]} vendedor(es)");
+        Console.WriteLine("\nPrograma encerrado. Obrigado por usar!");
+    }
+}
