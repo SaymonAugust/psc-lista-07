@@ -1,0 +1,62 @@
+// Arquivo: Exercicio3_Notas.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("=== Análise de Notas ===");
+        Console.WriteLine("Digite as notas dos alunos. Para encerrar, digite -1.\n");
+
+        // 1️⃣ Criar a lista
+        List<double> notas = new List<double>();
+
+        // 2️⃣ Ler notas até o usuário digitar -1
+        while (true)
+        {
+            Console.Write("Digite uma nota (ou -1 para encerrar): ");
+            double valor = double.Parse(Console.ReadLine());
+
+            if (valor == -1)
+                break; // encerra o loop
+
+            notas.Add(valor); // adiciona à lista
+        }
+
+        Console.WriteLine("\n=== Resultados ===");
+
+        // 3️⃣ Quantidade de valores
+        Console.WriteLine($"Quantidade de notas lidas: {notas.Count}");
+
+        // 4️⃣ Mostrar na ordem informada
+        Console.WriteLine("\nNotas na ordem informada:");
+        Console.WriteLine(string.Join("  ", notas)); // tudo na mesma linha
+
+        // 5️⃣ Mostrar na ordem inversa
+        Console.WriteLine("\nNotas na ordem inversa:");
+        for (int i = notas.Count - 1; i >= 0; i--)
+        {
+            Console.WriteLine(notas[i]);
+        }
+
+        // 6️⃣ Calcular soma e média
+        double soma = notas.Sum();
+        double media = notas.Count > 0 ? notas.Average() : 0;
+
+        Console.WriteLine($"\nSoma das notas: {soma:F2}");
+        Console.WriteLine($"Média das notas: {media:F2}");
+
+        // 7️⃣ Quantos estão acima da média
+        int acimaMedia = notas.Count(n => n > media);
+        Console.WriteLine($"Notas acima da média: {acimaMedia}");
+
+        // 8️⃣ Quantos estão abaixo de 7
+        int abaixoDeSete = notas.Count(n => n < 7);
+        Console.WriteLine($"Notas abaixo de 7: {abaixoDeSete}");
+
+        // 9️⃣ Encerrar o programa
+        Console.WriteLine("\nPrograma finalizado. Obrigado por usar!");
+    }
+}
