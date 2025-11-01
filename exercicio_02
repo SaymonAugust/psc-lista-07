@@ -1,0 +1,56 @@
+// Arquivo: Exercicio2_Interrogatorio.cs
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("=== Interrogatório sobre o crime ===\n");
+
+        // 1️⃣ Perguntas do interrogatório
+        string[] perguntas = new string[]
+        {
+            "Telefonou para a vítima?",
+            "Esteve no local do crime?",
+            "Mora perto da vítima?",
+            "Devia para a vítima?",
+            "Já trabalhou com a vítima?"
+        };
+
+        int respostasPositivas = 0; // contador de respostas "sim"
+
+        // 2️⃣ Fazendo as perguntas uma por uma
+        foreach (string pergunta in perguntas)
+        {
+            Console.Write(pergunta + " (s/n): ");
+            string resposta = Console.ReadLine().Trim().ToLower();
+
+            // 3️⃣ Validando entrada (aceita várias variações)
+            while (resposta != "s" && resposta != "n" && resposta != "sim" && resposta != "nao" && resposta != "não")
+            {
+                Console.Write("Resposta inválida. Digite apenas 's' ou 'n': ");
+                resposta = Console.ReadLine().Trim().ToLower();
+            }
+
+            if (resposta == "s" || resposta == "sim")
+                respostasPositivas++;
+        }
+
+        // 4️⃣ Determinar a classificação
+        string classificacao;
+        if (respostasPositivas == 5)
+            classificacao = "Assassino";
+        else if (respostasPositivas >= 3)
+            classificacao = "Cúmplice";
+        else if (respostasPositivas == 2)
+            classificacao = "Suspeita";
+        else
+            classificacao = "Inocente";
+
+        // 5️⃣ Mostrar resultado
+        Console.WriteLine($"\nNúmero de respostas positivas: {respostasPositivas}");
+        Console.WriteLine($"Classificação: {classificacao}");
+
+        Console.WriteLine("\n=== Fim do interrogatório ===");
+    }
+}
