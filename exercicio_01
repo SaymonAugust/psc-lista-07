@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("=== Exercícios com listas (C#) ===");
+        while (true)
+        {
+            Console.WriteLine("\nEscolha o exercício (1-4) ou 0 para sair:");
+            Console.WriteLine("1 - Temperaturas mensais (média e acima da média)");
+            Console.WriteLine("2 - Interrogatório sobre crime (classificação)");
+            Console.WriteLine("3 - Notas com sentinel -1 (estatísticas)");
+            Console.WriteLine("4 - Salários por comissão (contadores por faixa)");
+            Console.Write("Opção: ");
+            string opt = Console.ReadLine()?.Trim();
+
+            if (opt == "0") break;
+            if (opt == "1") Exercicio1();
+            else if (opt == "2") Exercicio2();
+            else if (opt == "3") Exercicio3();
+            else if (opt == "4") Exercicio4();
+            else Console.WriteLine("Opção inválida. Tente novamente.");
+        }
+
+        Console.WriteLine("Programa encerrado. Até mais!");
+    }
+
+    // -------- EXERCÍCIO 1 --------
+    static void Exercicio1()
+    {
+        Console.WriteLine("\n--- Exercício 1: Temperaturas mensais ---");
+        var meses = new string[]
+        {
+            "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+            "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
+        };
+
+        List<double> temperaturas = new List<double>();
+        for (int i = 0; i < 12; i++)
+        {
+            double temp = LerDouble($"Informe a temperatura média de {meses[i]}: ");
+            temperaturas.Add(temp);
+        }
+
+        double mediaAnual = temperaturas.Average();
+        Console.WriteLine($"\nMédia anual das temperaturas: {mediaAnual:F2}");
+
+        Console.WriteLine("\nTemperaturas acima da média anual:");
+        bool encontrou = false;
+        for (int i = 0; i < 12; i++)
+        {
+            if (temperaturas[i] > mediaAnual)
+            {
+                Console.WriteLine($"{i+1} - {meses[i]}: {temperaturas[i]:F2}");
+                encontrou = true;
+            }
+        }
+        if (!encontrou) Console.WriteLine("Nenhum mês teve temperatura acima da média.");
+    }
